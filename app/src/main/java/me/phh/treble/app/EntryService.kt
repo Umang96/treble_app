@@ -81,11 +81,12 @@ class Starter: BroadcastReceiver() {
             Log.d("PHH", "Service called from user none 0, ignore")
             return
         }
-        Log.d("PHH", "Starting service")
+        Log.d("PHH", "Starting service because received ${intent.action}")
         //TODO: Check current user == "admin" == 0
         when(intent.action) {
             Intent.ACTION_BOOT_COMPLETED, Intent.ACTION_LOCKED_BOOT_COMPLETED -> {
                 if(!EntryService.startedOnBoot) {
+                    PocoF4Defaults.loadDefaultsForF4IfNeeded(context)
                     context.startServiceAsUser(
                         Intent(context, EntryService::class.java),
                         UserHandle.SYSTEM

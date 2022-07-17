@@ -81,7 +81,7 @@ object Misc: EntryStartup {
                 Log.d("PHH", "Setting max aspect ratio for pre-o app $value")
             }
             MiscSettings.multiCameras -> {
-                val value = sp.getBoolean(key, false)
+                val value = sp.getBoolean(key, true)
 
                 safeSetprop("persist.sys.phh.include_all_cameras", if(value) "true" else "false")
                 if (value ||
@@ -169,7 +169,7 @@ object Misc: EntryStartup {
                 }
             }
             MiscSettings.displayFps -> {
-                val value = sp.getString(key, "-1").toInt()
+                val value = sp.getString(key, "1")!!.toInt()
                 val maxValue = displayManager.displays[0].supportedModes.size
                 if(value>= maxValue) {
                     Log.d("PHH", "Trying to set impossible mode " + value)
@@ -200,7 +200,7 @@ object Misc: EntryStartup {
                 SystemProperties.set("persist.sys.fflag.override.settings_fuse", if (!value) "true" else "false")
             }
             MiscSettings.backlightScale -> {
-                val value = sp.getBoolean(key, false)
+                val value = sp.getBoolean(key, true)
                 SystemProperties.set("persist.sys.phh.backlight.scale", if (value) "1" else "0")
             }
             MiscSettings.headsetDevinput -> {
