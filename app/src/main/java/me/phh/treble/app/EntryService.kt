@@ -82,6 +82,9 @@ class Starter: BroadcastReceiver() {
             return
         }
         Log.d("PHH", "Starting service because received ${intent.action}")
+        if(intent.action == Intent.ACTION_LOCKED_BOOT_COMPLETED) {
+            Misc.forceFps(1)
+        }
         //TODO: Check current user == "admin" == 0
         when(intent.action) {
             Intent.ACTION_BOOT_COMPLETED, Intent.ACTION_LOCKED_BOOT_COMPLETED -> {
