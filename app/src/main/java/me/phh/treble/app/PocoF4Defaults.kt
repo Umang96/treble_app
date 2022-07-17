@@ -14,6 +14,7 @@ object PocoF4Defaults {
                 SystemProperties.set("persist.sys.phh.backlight.scale", "1")
                 Misc.safeSetprop("persist.sys.phh.include_all_cameras", "true")
                 Misc.safeSetprop("persist.sys.phh.caf.media_profile", "true")
+                Misc.safeSetprop("persist.vendor.vilte_support", "0")
                 ctx.getSharedPreferences("prefs_device_defaults", Context.MODE_PRIVATE)
                     .edit().putBoolean("defaults_applied_once", true).apply()
             }
