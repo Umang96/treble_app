@@ -20,6 +20,7 @@ import kotlin.concurrent.thread
 class EntryService: Service() {
     companion object {
         var service: EntryService? = null
+        var startedOnBoot = false
     }
     override fun onBind(intent: Intent): IBinder? {
         return null
@@ -83,7 +84,16 @@ class Starter: BroadcastReceiver() {
         Log.d("PHH", "Starting service")
         //TODO: Check current user == "admin" == 0
         when(intent.action) {
-            Intent.ACTION_BOOT_COMPLETED, Intent.ACTION_MY_PACKAGE_REPLACED -> {
+            Intent.ACTION_BOOT_COMPLETED, Intent.ACTION_LOCKED_BOOT_COMPLETED -> {
+                if(!EntryService.startedOnBoot) {
+                    context.startServiceAsUser(
+                        Intent(context, EntryService::class.java),
+                        UserHandle.SYSTEM
+                    )
+                    EntryService.startedOnBoot = true
+                }
+            }
+            Intent.ACTION_MY_PACKAGE_REPLACED -> {
                 context.startServiceAsUser(Intent(context, EntryService::class.java), UserHandle.SYSTEM)
             }
         }
