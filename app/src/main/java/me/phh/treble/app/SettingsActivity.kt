@@ -70,9 +70,8 @@ class SettingsActivity : PreferenceActivity() {
             target.removeIf { it.fragment == ImsSettingsFragment::class.java.name }
         if (!CustomSettings.enabled())
             target.removeIf { it.fragment == CustomSettingsFragment::class.java.name }
-        val p = SystemProperties.get("ro.system.ota.json_url", "")
-        if (p.trim() == "")
-            target.removeIf { it.id.compareTo(R.id.updater) == 0 }
+        // remove updater
+        target.removeIf { it.id.compareTo(R.id.updater) == 0 }
     }
 
     /**

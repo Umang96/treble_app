@@ -64,11 +64,7 @@ class EntryService: Service() {
             tryC {
                 val p = SystemProperties.get("ro.system.ota.json_url", "")
                 val c = ComponentName(this, UpdaterActivity::class.java)
-                if(p.trim() == "") {
-                    packageManager.setComponentEnabledSetting(c, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0)
-                } else {
-                    packageManager.setComponentEnabledSetting(c, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0)
-                }
+                packageManager.setComponentEnabledSetting(c, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0)
             }
         }
     }
@@ -89,7 +85,7 @@ class Starter: BroadcastReceiver() {
         when(intent.action) {
             Intent.ACTION_BOOT_COMPLETED, Intent.ACTION_LOCKED_BOOT_COMPLETED -> {
                 if(!EntryService.startedOnBoot) {
-                    PocoF4Defaults.loadDefaultsForF4IfNeeded(context)
+                    PocoF4Defaults.loadDefaultsForF4IfNeeded()
                     context.startServiceAsUser(
                         Intent(context, EntryService::class.java),
                         UserHandle.SYSTEM

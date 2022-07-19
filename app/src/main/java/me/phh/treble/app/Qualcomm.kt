@@ -11,7 +11,7 @@ object Qualcomm: EntryStartup {
     val spListener = SharedPreferences.OnSharedPreferenceChangeListener { sp, key ->
         when(key) {
             QualcommSettings.alternateAudiopolicy -> {
-                val b = sp.getBoolean(key, false)
+                val b = sp.getBoolean(key, true)
                 val value = if(b) "1" else "0"
                 Misc.safeSetprop("persist.sys.phh.caf.audio_policy", value)
             }

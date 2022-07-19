@@ -80,6 +80,7 @@
 		<CheckBoxPreference
             android:defaultValue="true"
             android:key="key_misc_backlight_scale"
+			android:enabled="false"
             android:title="Force alternative backlight scale" />
         <CheckBoxPreference
             android:defaultValue="false"
@@ -89,6 +90,7 @@
 	<PreferenceCategory android:title="Camera">
 		<CheckBoxPreference
 			android:defaultValue="true"
+			android:enabled="false"
 			android:key="key_misc_multi_camera"
 			android:title="Expose Aux cameras" />
 		<CheckBoxPreference

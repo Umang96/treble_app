@@ -4,14 +4,17 @@
         android:defaultValue="true"
         android:key="key_qualcomm_alternate_mediaprofile"
         android:title="Use alternate camera profile"
+        android:enabled="false"
         android:summary="Requires a reboot" />
     <CheckBoxPreference
-        android:defaultValue="false"
+        android:defaultValue="true"
         android:key="key_qualcomm_alternate_audiopolicy"
+        android:enabled="false"
         android:title="Use alternate audio policy" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:key="key_qualcomm_disable_soundvolume_effect"
         android:title="Disable soundvolume effect"
+        android:enabled="false"
         android:summary="May fix audio distorsion" />
 </PreferenceScreen>
