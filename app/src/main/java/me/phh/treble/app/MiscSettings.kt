@@ -1,7 +1,6 @@
 package me.phh.treble.app
 
 import android.app.AlertDialog
-import android.app.Application
 import android.hardware.display.DisplayManager
 import android.os.Bundle
 import android.util.Log
@@ -24,6 +23,7 @@ object MiscSettings : Settings {
     val bluetooth = "key_misc_bluetooth"
     val securize = "key_misc_securize"
     val removeTelephony = "key_misc_removetelephony"
+    val governorPreference = "key_cpu_governor"
     val remotectl = "key_misc_remotectl"
     val disableAudioEffects = "key_misc_disable_audio_effects"
     val cameraTimestampOverride = "key_misc_camera_timestamp"
@@ -74,6 +74,11 @@ class MiscSettingsFragment : SettingsFragment() {
             }
 
             builder.show()
+            return@setOnPreferenceClickListener true
+        }
+
+        findPreference<Preference>(MiscSettings.governorPreference)?.setOnPreferenceClickListener {
+            Misc.safeSetprop("sys.phh.cpu.governor", "performance")
             return@setOnPreferenceClickListener true
         }
 
