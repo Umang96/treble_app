@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#404040"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvSched"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="schedutil"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tvPerf"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="performance"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tvPsave"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="powersave"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tvUserspace"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="userspace"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tvOndemand"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="ondemand"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tvConservative"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="conservative"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

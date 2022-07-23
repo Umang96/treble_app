@@ -2,10 +2,17 @@ package me.phh.treble.app
 
 import android.app.AlertDialog
 import android.hardware.display.DisplayManager
+import android.media.MediaCodec
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.view.children
 import androidx.preference.ListPreference
 import androidx.preference.Preference
+import java.io.File
 
 object MiscSettings : Settings {
     val mobileSignal = "key_misc_mobile_signal"
@@ -44,6 +51,13 @@ object MiscSettings : Settings {
 
 class MiscSettingsFragment : SettingsFragment() {
     override val preferencesResId = R.xml.pref_misc
+
+    override fun onResume() {
+        super.onResume()
+        findPreference<Preference>(MiscSettings.governorPreference)?.summary =
+            File("/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor").readText()
+    }
+
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         super.onCreatePreferences(savedInstanceState, rootKey)
 
@@ -78,7 +92,22 @@ class MiscSettingsFragment : SettingsFragment() {
         }
 
         findPreference<Preference>(MiscSettings.governorPreference)?.setOnPreferenceClickListener {
-            Misc.safeSetprop("sys.phh.cpu.governor", "performance")
+            val builder = AlertDialog.Builder(context)
+            var dialog: AlertDialog? = null
+            val ll = LayoutInflater.from(context).inflate(R.layout.gov_select, null, false) as LinearLayout
+            for(child in ll.children) {
+                val tv = child as TextView
+                tv.setOnClickListener {
+                    Misc.safeSetprop("sys.phh.cpu.governor", tv.text.toString().trim())
+                    Toast.makeText(context, "CPU Governor changed to ${tv.text}", Toast.LENGTH_SHORT).show()
+                    dialog?.dismiss()
+                    findPreference<Preference>(MiscSettings.governorPreference)?.summary =
+                        File("/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor").readText()
+                }
+            }
+            builder.setView(ll)
+            dialog = builder.create()
+            dialog.show()
             return@setOnPreferenceClickListener true
         }
 

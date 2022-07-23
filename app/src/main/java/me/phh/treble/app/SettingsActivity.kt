@@ -70,8 +70,6 @@ class SettingsActivity : PreferenceActivity() {
             target.removeIf { it.fragment == ImsSettingsFragment::class.java.name }
         if (!CustomSettings.enabled())
             target.removeIf { it.fragment == CustomSettingsFragment::class.java.name }
-        // remove updater
-        target.removeIf { it.id.compareTo(R.id.updater) == 0 }
     }
 
     /**
